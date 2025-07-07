@@ -1,15 +1,15 @@
 use starknet::ContractAddress;
 
-#[derive(Copy, Drop, Serde, PartialEq, starknet::Store, Clone)]
+#[derive(Drop, Serde, PartialEq, starknet::Store, Clone)]
 pub struct Car {
     pub plate: felt252,
     pub owner: ContractAddress,
     pub delegate_driver: ContractAddress,
     pub current_driver: ContractAddress,
-    pub telegram_id: u64,
     pub registered_at: u64,
     pub active: bool,
     pub car_model: felt252,
+    pub email: ByteArray,
 }
 
 // #[derive(Copy, Drop, Serde, PartialEq, starknet::Store, Clone)]

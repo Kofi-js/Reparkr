@@ -6,13 +6,13 @@ pub trait IReparkr<TContractState> {
     // CORE CAR MANAGEMENT FUNCTIONS
     
     // Registers a car with the caller as the owner
-    fn register_car(ref self: TContractState, plate: felt252, carModel: felt252, telegram_id: u64);
+    fn register_car(ref self: TContractState, plate: felt252, carModel: felt252, telegram_id: u64, email: ByteArray);
 
     // Gets the car struct by plate
     fn get_car(self: @TContractState, plate: felt252) -> Car;
 
-    // Edits car details (telegram_id and car_model)
-    fn edit_car(ref self: TContractState, plate: felt252, new_telegram_id: u64, new_car_model: felt252);
+    // Edits car details (telegram_id, car_model, and email)
+    fn edit_car(ref self: TContractState, plate: felt252, new_telegram_id: u64, new_car_model: felt252, new_email: ByteArray);
 
     // Deletes the car entry (soft delete)
     fn delete_car(ref self: TContractState, plate: felt252);

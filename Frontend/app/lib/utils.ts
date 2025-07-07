@@ -9,20 +9,28 @@ export function bigIntToHex(value: bigint): `0x${string}` {
   return `0x${value.toString(16)}`;
 }
 
+
 export function felt252ToString(felt: bigint): string {
+  // Convert bigint to hex
   let hex = felt.toString(16);
-  if (hex.length % 2 !== 0) hex = "0" + hex;
+  if (hex.length % 2 !== 0) hex = "0" + hex; // pad for full bytes
 
-  const buffer = Buffer.from(hex, "hex");
-  const utf8String = buffer.toString("utf-8").replace(/\0/g, "");
+  // Convert hex to byte array
+  const bytes = new Uint8Array(
+    hex.match(/.{1,2}/g)!.map((b) => parseInt(b, 16))
+  );
 
-  // If the decoded string is non-printable or suspiciously 1 char, return the number as a string
-  const isMostlyPrintable = /^[\x20-\x7E]+$/.test(utf8String); // printable ASCII
-  const isTooShortAndSuspicious = utf8String.length === 1 && felt < 256n;
+  // Decode bytes to UTF-8 string
+  const utf8String = new TextDecoder().decode(bytes).replace(/\0/g, "");
 
-  if (!isMostlyPrintable || isTooShortAndSuspicious) {
-    return felt.toString(); // fallback: treat as plain number
+  // Validate: printable characters and not just a single suspicious byte
+  const isPrintable = /^[\x20-\x7E]+$/.test(utf8String); // printable ASCII
+  const isSuspiciouslyShort = utf8String.length === 1 && felt < 256n;
+
+  if (!isPrintable || isSuspiciouslyShort) {
+    return felt.toString(); // fallback: return number as string
   }
 
   return utf8String;
 }
+

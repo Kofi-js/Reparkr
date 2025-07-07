@@ -16,7 +16,7 @@ import {
 } from "starknet";
 
 const REPARKR_CONTRACT_ADDRESS =
-  "0x03193deaadc746b4ff3ede905514ee0d48c461304a2edacd4aa6381f304838f5";
+  "0x0543733be79a15a98bc5e84b11deeda4c15f5f4a84763b7573090c9ea1da8645";
 
 export const myProvider = new RpcProvider({
   nodeUrl: process.env.NEXT_PUBLIC_RPC_URL,

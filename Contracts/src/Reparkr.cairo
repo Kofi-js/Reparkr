@@ -43,6 +43,7 @@ pub mod Reparkr {
         pub editor: ContractAddress,
         pub new_telegram_id: u64,
         pub new_car_model: felt252,
+        pub new_email: ByteArray,
     }
 
     #[derive(Drop, starknet::Event)]
@@ -67,7 +68,11 @@ pub mod Reparkr {
     #[abi(embed_v0)]
     pub impl ReparkrImpl of IReparkr<ContractState> {
         fn register_car(
-            ref self: ContractState, plate: felt252, carModel: felt252, telegram_id: u64,
+            ref self: ContractState, 
+            plate: felt252, 
+            carModel: felt252, 
+            telegram_id: u64,
+            email: ByteArray,
         ) {
             let caller = get_caller_address();
             let timestamp = get_block_timestamp();
@@ -85,6 +90,7 @@ pub mod Reparkr {
                 registered_at: timestamp,
                 active: true,
                 car_model: carModel,
+                email,
             };
 
             // Update primary car storage
@@ -111,7 +117,11 @@ pub mod Reparkr {
         }
 
         fn edit_car(
-            ref self: ContractState, plate: felt252, new_telegram_id: u64, new_car_model: felt252,
+            ref self: ContractState, 
+            plate: felt252, 
+            new_telegram_id: u64, 
+            new_car_model: felt252,
+            new_email: ByteArray,
         ) {
             let caller = get_caller_address();
             let mut car = self.cars.read(plate);
@@ -121,13 +131,20 @@ pub mod Reparkr {
 
             car.telegram_id = new_telegram_id;
             car.car_model = new_car_model;
+            car.email = new_email.clone();
 
             self.cars.write(plate, car);
 
             self
                 .emit(
                     Event::CarEdited(
-                        CarEdited { plate, editor: caller, new_telegram_id, new_car_model },
+                        CarEdited { 
+                            plate, 
+                            editor: caller, 
+                            new_telegram_id, 
+                            new_car_model,
+                            new_email,
+                        },
                     ),
                 );
         }
