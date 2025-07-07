@@ -7,12 +7,12 @@ const resend = new Resend(process.env.NEXT_RESEND_API);
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { username, plate } = body;
+    const { email, plate } = body;
 
     // Validate input
-    if (!username || !plate) {
+    if (!email || !plate) {
       return Response.json(
-        { error: "Username and plate are required" },
+        { error: "Email and plate are required" },
         { status: 400 }
       );
     }
@@ -20,10 +20,10 @@ export async function POST(req: Request) {
     // Send email to admin inbox
     const { data, error } = await resend.emails.send({
       from: "Reparkr <onboarding@resend.dev>",
-      to: ["salaki1902@gmail.com"],
-      subject: "New entry",
+      to: ["vwegbakofi@gmail.com"],
+      subject: "ReParkr Notification",
       react: EmailTemplate({
-        username,
+        username: email.split("@")[0],
         plate,
       }) as React.ReactElement,
     });

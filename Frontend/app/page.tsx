@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { byteArray } from "starknet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -59,29 +60,35 @@ export default function HomePage() {
   };
 
   const handleSendAlert = async () => {
-    try {
-      setIsSending(true);
-      const response = await fetch("/api/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: felt252ToString(searchResult.telegram_id),
-          plate: felt252ToString(searchResult.plate),
-        }),
-      });
+  try {
+    setIsSending(true);
+    
+    // Decode email if it's not already a string
+    const decodedEmail = typeof searchResult.email === 'string' 
+      ? searchResult.email 
+      : byteArray.stringFromByteArray(searchResult.email);
+    
+    const response = await fetch("/api/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: decodedEmail,
+        plate: felt252ToString(searchResult.plate),
+      }),
+    });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to send email");
-      }
-    } catch (err: any) {
-      console.log(err);
-    } finally {
-      setIsSending(false);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Failed to send email");
     }
-  };
+  } catch (err: any) {
+    console.log(err);
+  } finally {
+    setIsSending(false);
+  }
+};
 
   const handleQRScan = () => {
     toast("QR Scanner");

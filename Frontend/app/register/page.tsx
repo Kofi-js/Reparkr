@@ -3,6 +3,7 @@
 import type React from "react";
 
 import { useState } from "react";
+import { byteArray } from "starknet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -29,12 +30,13 @@ import {
 } from "@/hooks/use-blockchain";
 import { REPARKR_ABI } from "@/abis/reparkr_abi";
 import { useAccount } from "@starknet-react/core";
+import { shortString } from "starknet";
 
 export default function RegisterPage() {
   const { account } = useAccount();
-  const [plateNumber, setPlateNumber] = useState("123");
-  const [contactMethod, setContactMethod] = useState("telegram");
-  const [contactValue, setContactValue] = useState("1234");
+  const [plateNumber, setPlateNumber] = useState("TCN-3047");
+  const [contactMethod, setContactMethod] = useState("email");
+  const [contactValue, setContactValue] = useState("user@email.com");
   const [carModel, setCarModel] = useState("Toyota");
   const [isRegistering, setIsRegistering] = useState(false);
 
@@ -52,11 +54,11 @@ export default function RegisterPage() {
 
       setIsRegistering(true);
 
-      await writeContractWithStarknetJs(account, "register_car", [
-        plateNumber,
-        carModel,
-        contactValue,
-      ]);
+      await writeContractWithStarknetJs(account, "register_car", {
+        plate:plateNumber,
+        carModel: carModel,
+        email: byteArray.byteArrayFromString(contactValue),
+    });
 
       toast.success("Car registered successfully!");
     } catch (err) {
@@ -129,8 +131,8 @@ export default function RegisterPage() {
                     <SelectValue placeholder="Select how you want to be contacted" />
                   </SelectTrigger>
                   <SelectContent>
-                    {/* <SelectItem value="email">Email</SelectItem> */}
-                    <SelectItem value="telegram">Telegram</SelectItem>
+                    <SelectItem value="email">Email</SelectItem>
+                    {/* <SelectItem value="telegram">Telegram</SelectItem> */}
                     {/* <SelectItem value="whatsapp">WhatsApp</SelectItem>
                     <SelectItem value="push">Push Notification</SelectItem> */}
                   </SelectContent>
@@ -139,12 +141,12 @@ export default function RegisterPage() {
 
               {/* Contact Value */}
               <div className="space-y-2">
-                <Label htmlFor="contact-value">Telegram Username</Label>
+                <Label htmlFor="contact-value">Email Address</Label>
                 <Input
                   id="contact-value"
                   placeholder="@username"
                   value={contactValue}
-                  onChange={(e) => setContactValue(e.target.value)}
+                  onChange={(e) => setContactValue(e.target.value)} 
                   disabled={contactMethod === "push"}
                   required
                 />

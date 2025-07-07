@@ -29,24 +29,24 @@ export function WalletGuard({
   const { address } = useAccount();
   const [showConnectModal, setShowConnectModal] = useState(false);
 
-  const hasPromptedTelegram = useRef(false);
+  // const hasPromptedTelegram = useRef(false);
 
-  useEffect(() => {
-    console.log(address);
-    if (address && !hasPromptedTelegram.current) {
-      toast.success("Wallet connected successfully!");
-      hasPromptedTelegram.current = true;
+  // useEffect(() => {
+  //   console.log(address);
+  //   if (address && !hasPromptedTelegram.current) {
+  //     toast.success("Wallet connected successfully!");
+  //     hasPromptedTelegram.current = true;
 
-      setTimeout(() => {
-        const confirmed = window.confirm(
-          "Do you want to receive parking alerts via Telegram?"
-        );
-        if (confirmed) {
-          window.open(`https://t.me/ReParkrBot?start=${address}`, "_blank");
-        }
-      }, 500);
-    }
-  }, [address]);
+  //     setTimeout(() => {
+  //       const confirmed = window.confirm(
+  //         "Do you want to receive parking alerts via Telegram?"
+  //       );
+  //       if (confirmed) {
+  //         window.open(`https://t.me/ReParkrBot?start=${address}`, "_blank");
+  //       }
+  //     }, 500);
+  //   }
+  // }, [address]);
 
   if (!address) {
     return (
