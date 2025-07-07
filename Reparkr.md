@@ -1,13 +1,18 @@
 # Reparkr
 
 ## Project Description
-Reparkr is a decentralized repark-request system built on Starknet. It lets car owners register their plate numbers as on-chain identities, and enables other drivers to send privacy-preserving repark requests when they are blocked. The system solves the common urban problem of cars being blocked by others, providing a seamless way to contact vehicle owners without revealing personal information.
+Reparkr is a decentralized repark-request system built on Starknet, inspired by a common problem faced in Nigeria and many African cities. In places with poor parking infrastructure, cars are often blocked in, and drivers waste time searching for the owner of the obstructing vehicle. Reparkr lets car owners register their plate numbers as on-chain identities, and enables other drivers to send privacy-preserving repark requests when they are blocked—solving a real, everyday problem in Africa.
+
+---
+
+**Founder's Note:**
+"This project was born out of my own experiences in Nigeria, where parking chaos is a daily reality. With Reparkr, I hope to make life easier for drivers in Nigeria, across Africa, and anywhere this problem exists."
 
 ## Project Category
 SocialFi / Urban Utility / Infrastructure
 
 ## Project Link
-
+https://reparkr.vercel.app/
 
 ## Project Codebase
 https://github.com/Kofi-js/Reparkr

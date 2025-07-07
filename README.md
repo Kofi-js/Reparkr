@@ -1,14 +1,28 @@
 # Reparkr 🚗
 
-A decentralized repark-request system built on Starknet that lets car owners register their plate numbers as on-chain identities, enabling other drivers to send privacy-preserving repark requests when they are blocked.
+## 🌍 Context: Solving a Real Problem in Nigeria & Africa
+
+In many African cities—especially in Nigeria—parking at public places or events is often chaotic due to poor parking infrastructure. Cars frequently get blocked in, and drivers waste valuable time searching for the owner of the obstructing vehicle. This leads to frustration, delays, and sometimes even conflict.
+
+**Reparkr** was built to solve this uniquely African problem: by allowing drivers to register their cars and set up delegate drivers, anyone can quickly ping the owner (or their delegate) of a blocking vehicle via the app, saving time and reducing stress for everyone.
+
+---
 
 ## 🚘 Problem
 
-In crowded cities, cars are often blocked by others, causing frustration and delays. Finding the owner of the blocking car is usually difficult and inefficient. Traditional solutions like leaving notes or calling authorities are slow and often ineffective.
+In Nigeria and many African cities, cars are often blocked by others due to limited or unstructured parking, causing frustration and delays. Finding the owner of the blocking car is usually difficult and inefficient. Traditional solutions like leaving notes or calling authorities are slow and often ineffective.
 
 ## ✅ Solution
 
 Reparkr enables car owners to register their vehicles on Starknet, associating their number plates with private contact channels. When a car is blocked, anyone can send a repark request to the owner without revealing personal contact details.
+
+---
+
+## 👤 Founder's Note
+
+"The idea for Reparkr came from my own experiences in Nigeria, where poor parking infrastructure often leads to cars being blocked in at public places or events. Drivers waste time and get frustrated searching for the owner of the obstructing vehicle. With Reparkr, I wanted to create a solution that not only addresses this problem in Nigeria, but can also help cities across Africa and beyond."
+
+---
 
 ## 🧩 Key Features
 
