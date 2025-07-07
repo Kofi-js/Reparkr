@@ -146,7 +146,7 @@ export default function DashboardPage() {
                             {felt252ToString(car.plate)}
                           </CardTitle>
                           <CardDescription>
-                            {felt252ToString(car.car_model)}
+                            {felt252ToString(car.car_model)} <br />
                             {felt252ToString(car.plate)}
                           </CardDescription>
                         </div>
