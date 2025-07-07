@@ -18,7 +18,7 @@ https://reparkr.vercel.app/
 https://github.com/Kofi-js/Reparkr
 
 ## Project Video
-
+https://drive.google.com/drive/folders/1x97rOQtX-ZLhlGfJPd3F_wI0ld8AITJG?usp=sharing
 
 ## Key Features
 - **Plate-to-Identity Resolution:** Query car plate numbers to retrieve owner contact channels
