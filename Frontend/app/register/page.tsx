@@ -3,6 +3,7 @@
 import type React from "react";
 
 import { useState } from "react";
+import { byteArray } from "starknet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -56,7 +57,7 @@ export default function RegisterPage() {
       await writeContractWithStarknetJs(account, "register_car", {
         plate:plateNumber,
         carModel: carModel,
-        email: shortString.encodeShortString(contactValue),
+        email: byteArray.byteArrayFromString(contactValue),
     });
 
       toast.success("Car registered successfully!");

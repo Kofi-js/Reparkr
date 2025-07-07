@@ -41,7 +41,6 @@ pub mod Reparkr {
     pub struct CarEdited {
         pub plate: felt252,
         pub editor: ContractAddress,
-        pub new_telegram_id: u64,
         pub new_car_model: felt252,
         pub new_email: ByteArray,
     }
@@ -70,8 +69,7 @@ pub mod Reparkr {
         fn register_car(
             ref self: ContractState, 
             plate: felt252, 
-            carModel: felt252, 
-            telegram_id: u64,
+            carModel: felt252,
             email: ByteArray,
         ) {
             let caller = get_caller_address();
@@ -86,7 +84,6 @@ pub mod Reparkr {
                 owner: caller,
                 delegate_driver: Zero::zero(),
                 current_driver: caller,
-                telegram_id,
                 registered_at: timestamp,
                 active: true,
                 car_model: carModel,
@@ -119,7 +116,6 @@ pub mod Reparkr {
         fn edit_car(
             ref self: ContractState, 
             plate: felt252, 
-            new_telegram_id: u64, 
             new_car_model: felt252,
             new_email: ByteArray,
         ) {
@@ -129,7 +125,6 @@ pub mod Reparkr {
             assert(car.active, CAR_NOT_FOUND);
             assert(caller == car.owner, UNAUTHORIZED_CALLER);
 
-            car.telegram_id = new_telegram_id;
             car.car_model = new_car_model;
             car.email = new_email.clone();
 
@@ -140,8 +135,7 @@ pub mod Reparkr {
                     Event::CarEdited(
                         CarEdited { 
                             plate, 
-                            editor: caller, 
-                            new_telegram_id, 
+                            editor: caller,
                             new_car_model,
                             new_email,
                         },

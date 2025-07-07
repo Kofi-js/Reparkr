@@ -179,13 +179,13 @@ export default function DashboardPage() {
                         <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
                           <div className="flex items-center justify-between">
                             <span className="text-sm text-gray-600 dark:text-gray-400">
-                              Telegram
+                              Email
                             </span>
                             <Badge
                               variant="outline"
                               className="font-mono text-xs"
                             >
-                              {felt252ToString(car.telegram_id)}
+                              {felt252ToString(car.email)}
                             </Badge>
                           </div>
                         </div>
